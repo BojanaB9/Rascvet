@@ -1,10 +1,192 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mk">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расцут — самодоверба и емоционална писменост</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-$END$
+
+<div id="growth-meter" aria-live="polite">
+    <svg id="plant-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div class="label">РАСТЕЖ<br><b id="growth-count">0</b>/5</div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="wrap">
+        <p class="eyebrow">инспирирано од HBSC · млади и добросостојба</p>
+        <h1>Секое чувство<br>има <em>име</em>.<br>Научи го твоето.</h1>
+        <p class="lede">Расцут е мала интерактивна градина од игри за самодоверба и препознавање емоции. Направена за ученици од 11 до 15 години. Помини низ пет активности и гледај како расте твоето растение.</p>
+        <div class="hero-cta">
+            <button class="btn" onclick="document.getElementById('intro').scrollIntoView()">Влези во градината</button>
+            <span class="scroll-hint">5 мини-игри · ~15 минути</span>
+        </div>
+    </div>
+</header>
+
+<!-- INTRO -->
+<section class="section-intro" id="intro">
+    <div class="wrap">
+        <div class="section-head">
+            <p class="kicker">Зошто ова е важно</p>
+            <h2>Самодоверба и емоционална писменост</h2>
+            <p>Меѓународната студија HBSC (Health Behaviour in School-aged Children) го следи здравјето и добросостојбата на ученици низ Европа, вклучувајќи ја и Северна Македонија. Едно од нејзините постојани сознанија е дека тоа како младите се чувствуваат кон себе и колку умеат да ги препознаат и именуваат своите емоции е тесно поврзано со нивното ментално здравје, односите со врсниците и справувањето со стрес.</p>
+        </div>
+        <div class="grid3">
+            <div class="card">
+                <h3 style="font-size:1.1rem">Што е самодоверба?</h3>
+                <p style="font-size:0.95rem;color:#3a4c40">Самодовербата е став за вашите вештини и способности. Тоа значи дека се прифаќате и верувате во себе и имате чувство на контрола во вашиот живот.</p>
+            </div>
+            <div class="card">
+                <h3 style="font-size:1.1rem">Што е емоционална писменост?</h3>
+                <p style="font-size:0.95rem;color:#3a4c40">Емоционалната интелигенција се однесува на способноста за идентификување и управување со сопствените емоции, како и со емоциите на другите. </p>
+            </div>
+            <div class="card">
+                <h3 style="font-size:1.1rem">Зошто игри?</h3>
+                <p style="font-size:0.95rem;color:#3a4c40">Учењето преку игра овозможува да го продлабочиш своето разбирање за твоите емоции без притисокот кој би се појавил во вистински ситуации.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GAME 1: QUIZ -->
+<section id="game1">
+    <div class="wrap">
+        <div class="game-card">
+            <span class="tag">игра 1 · квиз</span>
+            <h2>Препознај го чувството</h2>
+            <p class="lede">Прочитај ја ситуацијата и избери кое чувство најдобро ја опишува. Не брзај, дади си време да размислиш.</p>
+
+            <div id="quiz-progress">прашање 1 / 5</div>
+            <div id="quiz-scenario"></div>
+            <div class="opts" id="quiz-opts"></div>
+            <div id="quiz-feedback"></div>
+            <div style="margin-top:20px;">
+                <button class="btn ghost" id="quiz-next" style="display:none">Следно →</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GAME 2: STORY -->
+<section id="game2">
+    <div class="wrap">
+        <div class="game-card">
+            <span class="tag">игра 2 · интерактивна приказна</span>
+
+            <h2>Еден ден на училиште</h2>
+
+            <p class="lede">
+                Во текот на еден обичен училишен ден ќе се најдеш во различни ситуации.
+                Секоја одлука влијае на тоа како се чувствуваш и како размислуваш за себе си.
+                На крајот ќе видиш каков ден си изградил/а.
+            </p>
+
+            <div id="story-progress"></div>
+
+            <div id="story-text"></div>
+
+            <div class="story-choices" id="story-choices"></div>
+
+            <div class="story-note" id="story-note"></div>
+        </div>
+    </div>
+</section>
+
+<!-- GAME 3: CATCH -->
+<section id="game3">
+    <div class="wrap">
+        <div class="game-card">
+            <span class="tag">игра 3 · рефлекс</span>
+            <h2>Улови ги добрите мисли</h2>
+            <p class="lede">Прочитај ги мислите кои паѓаат и одлучи дали ова е мисла која те гради? Кликни само на градбените. Брзината се зголемува со текот на времето, а имаш само 3 обиди за грешка.</p>
+
+            <div id="catch-hud">
+                <span>резултат: <b id="catch-score" class="mono">0</b></span>
+                <span class="lives">живот: <b id="catch-lives" class="mono">●●●</b></span>
+                <span>време: <b id="catch-time" class="mono">40</b>s</span>
+            </div>
+            <div id="catch-arena">
+                <div id="catch-overlay">
+                    <h3 style="font-size:1.3rem;margin-bottom:14px">Подготвен?</h3>
+                    <p style="max-width:42ch;color:#3a4c40;font-size:0.95rem;margin-bottom:20px"></p>
+                    <button class="btn" id="catch-start">Старт</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GAME 4: MEMORY MATCH -->
+<section id="game4">
+    <div class="wrap">
+        <div class="game-card">
+            <span class="tag">игра 4 · меморија</span>
+            <h2>Спари ја мислата</h2>
+            <p class="lede">Под картичките се кријат критички мисли и нивните здрави преформулирања. Пронајди го секој пар. Помалку промашени обиди значи подобар краен резултат.</p>
+
+            <div id="memory-hud">
+                <span>парови: <b id="mem-found" class="mono">0</b>/6</span>
+                <span>обиди: <b id="mem-tries" class="mono">0</b></span>
+            </div>
+            <div id="memory-grid"></div>
+        </div>
+    </div>
+</section>
+
+<!-- GAME 5: WHACK-A-THOUGHT -->
+<section id="game5">
+    <div class="wrap">
+        <div class="game-card">
+            <span class="tag">игра 5 · брзина + фокус</span>
+            <h2>Мисли под притисок</h2>
+            <p class="lede">Мисли ќе никнуваат накратко во случајни полиња на мрежата. Стигни да кликнеш на градбените пред да исчезнат, игнорирај ги мислите кои не се конструктивни. Со секој круг, времето на прикажување се скратува.</p>
+
+            <div id="whack-hud">
+                <span>резултат: <b id="whack-score" class="mono">0</b></span>
+                <span class="lives">живот: <b id="whack-lives" class="mono">●●●</b></span>
+                <span>круг: <b id="whack-round" class="mono">0</b>/6</span>
+            </div>
+            <div id="whack-overlay">
+                <h3 style="font-size:1.3rem;margin-bottom:14px">Подготвен?</h3>
+                <p style="max-width:42ch;color:#3a4c40;font-size:0.95rem;margin:0 auto 20px"></p>
+                <button class="btn" id="whack-start">Старт</button>
+            </div>
+            <div id="whack-grid" style="display:none"></div>
+        </div>
+    </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results">
+    <div class="wrap">
+        <div class="section-head">
+            <p class="kicker">твојата градина</p>
+            <h2>Погледни колку порасна</h2>
+        </div>
+        <div class="result-badge">
+            <svg id="result-plant" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"></svg>
+            <div>
+                <p id="result-text" style="margin:0;font-size:1.05rem">Заврши ги петте игри погоре за да го видиш твоето растение целосно расцветано.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    РАСЦУТ · дигитално решение инспирирано од HBSC
+</footer>
+
+<!-- Load main.js FIRST — it defines the shared growth state and phrase banks
+     that game1.js–game5.js depend on. -->
+<script src="js/main.js"></script>
+<script src="js/sounds.js"></script>
+<script src="js/game1.js"></script>
+<script src="js/game2.js"></script>
+<script src="js/game3.js"></script>
+<script src="js/game4.js"></script>
+<script src="js/game5.js"></script>
 </body>
 </html>

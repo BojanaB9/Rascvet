@@ -1,0 +1,91 @@
+/* ============================================================
+   main.js
+   Shared state used across every game: the growth meter (0..5)
+   and the shared "good / bad thought" phrase banks used by
+   game3.js (catch) and game5.js (whack-a-thought).
+   Load this file FIRST, before any of the game*.js files.
+   ============================================================ */
+
+let growth = 0;
+
+const plantSvgs = [
+    // 0 seed
+    `<circle cx="20" cy="30" r="4" fill="#8a6a3a"/><path d="M20 30 L20 34" stroke="#8a6a3a" stroke-width="2"/>`,
+    // 1 sprout
+    `<path d="M20 34 V24" stroke="#3F5B45" stroke-width="2.5" fill="none"/><path d="M20 26 C13 24 11 17 11 17 C11 17 17 17 20 26" fill="#6B8F71"/>`,
+    // 2 small leafy
+    `<path d="M20 34 V18" stroke="#3F5B45" stroke-width="2.5" fill="none"/><path d="M20 22 C12 20 10 12 10 12 C10 12 16 12 20 22" fill="#6B8F71"/><path d="M20 18 C28 16 30 9 30 9 C30 9 23 9 20 18" fill="#3F5B45"/>`,
+    // 3 fuller leafy
+    `<path d="M20 34 V13" stroke="#3F5B45" stroke-width="2.5" fill="none"/><path d="M20 22 C11 20 9 11 9 11 C9 11 16 11 20 22" fill="#6B8F71"/><path d="M20 17 C29 15 31 7 31 7 C31 7 23 7 20 17" fill="#3F5B45"/><path d="M20 26 C14 27 11 32 11 32 C11 32 17 33 20 26" fill="#6B8F71"/>`,
+    // 4 budding
+    `<path d="M20 34 V11" stroke="#3F5B45" stroke-width="2.5" fill="none"/><path d="M20 20 C11 18 9 10 9 10 C9 10 16 10 20 20" fill="#6B8F71"/><path d="M20 16 C29 14 31 6 31 6 C31 6 23 6 20 16" fill="#3F5B45"/><path d="M20 26 C14 27 11 32 11 32 C11 32 17 33 20 26" fill="#6B8F71"/><circle cx="20" cy="9" r="5" fill="#E8B94E"/>`,
+    // 5 full bloom
+    `<path d="M20 34 V14" stroke="#3F5B45" stroke-width="2.5" fill="none"/><path d="M20 22 C10 20 8 10 8 10 C8 10 16 10 20 22" fill="#3F5B45"/><path d="M20 27 C13 28 10 33 10 33 C10 33 17 34 20 27" fill="#6B8F71"/><g fill="#E8637A"><circle cx="20" cy="8" r="5"/><circle cx="13" cy="12" r="5"/><circle cx="27" cy="12" r="5"/><circle cx="20" cy="16" r="5"/></g><circle cx="20" cy="12" r="3.5" fill="#E8B94E"/>`
+];
+
+function renderPlant(el, stage){
+    el.innerHTML = plantSvgs[stage];
+}
+
+function updateGrowth(){
+    document.getElementById('growth-count').textContent = growth;
+    renderPlant(document.getElementById('plant-svg'), growth);
+    renderPlant(document.getElementById('result-plant'), growth);
+    const rt = document.getElementById('result-text');
+    const msgs = [
+        "Заврши ги петте игри погоре за да го видиш твоето растение целосно расцветано.",
+        "Прв чекор направен — семето 'пука'. Продолжи со следната игра.",
+        "Твоето растение веќе никнало. Продолжи натаму.",
+        "Расте убаво — веќе има повеќе листови.",
+        "Речиси е тука — се појавува прв пупка!",
+        "Целосно расцветано! Заврши ги сите пет активности — тоа е знак дека вложи време во себе. Тоа е самодоверба во дело."
+    ];
+    rt.textContent = msgs[growth];
+}
+
+/* Shared phrase banks — used by game3 (catch) and game5 (whack-a-thought).
+   Includes "trap" phrases that sound positive/motivating but are actually
+   unhelpful pressure, so players have to read for meaning, not tone. */
+const goodThoughts = [
+    "Направив грешка, но тоа не ме дефинира",
+    "Дозволено ми е да учам бавно",
+    "Горд/а сум на трудот, не само на резултатот",
+    "Ова чувство ќе помине",
+    "Може да побарам помош",
+    "Доволен/на сум ваков/ваква каков/каква што сум",
+    "Секој ден е нов обид",
+    "Во ред е да не знам сѐ уште",
+    "Мојата вредност не зависи од оценка",
+    "Уф, ова боли, ама нема да трае вечно",
+    "Не мора денес да сум најдобар/најдобра, доволно е да пробам",
+    "И порано ми беше тешко, а некако си најдов начин",
+    "Ова е еден лош момент, не цел лош живот",
+    "Не сум единствениот/единствената што ја забрка работата",
+    "Некој ме сака ваков/ваква, значи сепак вредам нешто",
+    "Не мора веднаш да го решам сè, чекор по чекор оди",
+    "Дури и оваа грешка ме научи на нешто",
+    "Смее да ми биде гајле — заслужувам и одмор, не само трчање",
+    "Тоа што нешто ме растажи не значи дека сум лош/а човек"
+];
+const badThoughts = [
+    "Никогаш нема да бидам доволно добар/добра",
+    "Сите мислат лошо за мене",
+    "Мора секогаш да бидам позитивен/на",
+    "Не смеам никогаш да покажам слабост",
+    "Треба да бидам совршен/а во сѐ",
+    "Ако не сум прв/прва, значи сум пропаднал/а",
+    "Барањето помош значи дека сум слаб/слаба",
+    "Мора постојано да се докажувам",
+    "Требаше веднаш да знам подобро, глупо од мене",
+    "Никој навистина не ме разбира, ни не се труди",
+    "Штом еднаш згрешив, сега мора двојно да се трудам за да се поправи тоа",
+    "Не смеам да покажам дека нешто ме боли, ќе испаднам чуден/чудна",
+    "На другите им оди лесно, само јас се мачам вака",
+    "Ако не сум секогаш подготвен/а, ќе испаднам несериозен/на",
+    "Морам да ги надминам сите, инаку сум никој",
+    "Требаше однапред да претпоставам дека ќе се случи ова",
+    "Ако побарам помош сега, ќе изгледа како воопшто не знам да се снајдам",
+    "Едноставно не сум создаден/а за вакви работи"
+];
+/* Initial paint of the growth meter on page load */
+document.addEventListener('DOMContentLoaded', updateGrowth);
