@@ -1,10 +1,3 @@
-/* ============================================================
-   main.js
-   Shared state used across every game: the growth meter (0..5)
-   and the shared "good / bad thought" phrase banks used by
-   game3.js (catch) and game5.js (whack-a-thought).
-   Load this file FIRST, before any of the game*.js files.
-   ============================================================ */
 
 let growth = 0;
 
