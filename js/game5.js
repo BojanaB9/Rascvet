@@ -1,8 +1,3 @@
-/* ============================================================
-   game5.js — "Мисли под притисок" (whack-a-thought reflex game)
-   Depends on: main.js (growth, updateGrowth, goodThoughts, badThoughts)
-   ============================================================ */
-
 const whackGood = goodThoughts;
 const whackBad = badThoughts;
 
