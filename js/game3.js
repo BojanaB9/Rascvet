@@ -1,11 +1,3 @@
-/* ============================================================
-   game3.js — "Улови ги добрите мисли" (reflex catch game)
-   No color-coding: every falling item looks identical, so the
-   player has to read for meaning. Difficulty ramps up over time
-   (faster spawns, faster falls) and 3 wrong clicks ends the run.
-   Depends on: main.js (growth, updateGrowth, goodThoughts, badThoughts)
-   ============================================================ */
-
 let catchScore = 0;
 let catchTimeLeft = 40;
 let catchLives = 3;
